@@ -1,6 +1,6 @@
-function Electricity() {
+function Electricity(currentState) {
 
-    let state = {
+    let state = currentState || {
         unitsAvailable: 0,
         amount: 0,
         unitsBought: 0,
@@ -16,6 +16,12 @@ function Electricity() {
     };
 
     function topUpElectricity(amount) {
+        // if(state.advance){
+            
+        // } else {
+
+        // }
+
         if(amount == 10){
             state.unitsAvailable += 7;
             state.unitsBought += 7;
@@ -27,8 +33,11 @@ function Electricity() {
             state.unitsBought += 35;
         } else {
             //advance
-            state.unitsAvailable += 21;
-            state.unitsBought += 21;
+            if(state.advance == false){
+                state.unitsAvailable += 21;
+                state.unitsBought += 21;
+                state.advance = true;
+            }    
         }
         //add the amount spent in the amount property of the state variable as it denotes the total amount spent
         state.amount += amount;
@@ -52,6 +61,7 @@ function Electricity() {
     }
 
     function advanceTaken() {
+        return state.advance;
     }
 
     function totalAmountSpent() {
